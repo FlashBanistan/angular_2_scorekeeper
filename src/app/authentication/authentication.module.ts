@@ -1,9 +1,12 @@
-import { CommonModule } from '@angular/common';
+// ANGULAR IMPORTS
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
+// COMPONENTS
 import { AuthenticationComponent } from './authentication.component';
 
+// SERVICES
 import { AuthenticationService } from './authentication.service';
 
 

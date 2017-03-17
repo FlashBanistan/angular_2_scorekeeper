@@ -1,5 +1,10 @@
+// ANGULAR IMPORTS
 import { NgModule } from '@angular/core';
+
+// COMPONENTS
 import { SpinnerComponent } from './spinner/spinner.component';
+
+// PIPES
 import { SearchPipe } from './search.pipe';
 
 
@@ -16,4 +21,6 @@ import { SearchPipe } from './search.pipe';
   ],
   providers: [],
 })
+
+
 export class SharedModule { }

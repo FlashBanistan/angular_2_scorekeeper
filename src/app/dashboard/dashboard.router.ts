@@ -1,6 +1,8 @@
-import { ModuleWithProviders } from '@angular/core';
+// ANGULAR IMPORTS
+import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
+// COMPONENTS
 import { DashboardComponent } from './dashboard.component';
 
 
@@ -9,4 +11,14 @@ const routes: Routes = [
 ]
 
 
-export const DashboardRouter: ModuleWithProviders = RouterModule.forChild(routes);
+@NgModule({
+  imports: [
+    RouterModule.forChild(routes),
+  ],
+  exports: [
+    RouterModule,
+  ]
+})
+
+
+export class DashboardRouter {};

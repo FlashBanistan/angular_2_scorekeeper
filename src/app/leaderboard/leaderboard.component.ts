@@ -1,7 +1,11 @@
+// ANGULAR IMPORTS
 import { Component, OnInit } from '@angular/core';
 
-import { Statistics } from './statistics';
+//SERVICES
 import { LeaderboardService } from './leaderboard.service';
+
+// CLASSES
+import { Statistics } from './statistics';
 
 
 @Component({
@@ -13,7 +17,20 @@ import { LeaderboardService } from './leaderboard.service';
 
 
 export class LeaderboardComponent implements OnInit {
-  constructor(private leaderboardService: LeaderboardService) { }
+  constructor(private leaderboardService: LeaderboardService) {}
+
+
+  ngOnInit(): void {
+    this.isRequesting = true;
+     this.leaderboardService
+      .getStatistics()
+        .subscribe(
+                  data => this.statistics = data,
+                  () => this.stopRefreshing(),
+                  () => this.stopRefreshing(),
+              )
+  }
+
 
   isRequesting: boolean;
   statistics: Statistics[] = [];
@@ -36,19 +53,7 @@ export class LeaderboardComponent implements OnInit {
     }
   ];
 
-
-  ngOnInit(): void {
-    this.isRequesting = true;
-     this.leaderboardService
-      .getStatistics()
-        .subscribe(
-                  data => this.statistics = data,
-                  () => this.stopRefreshing(),
-                  () => this.stopRefreshing(),
-              )
-  }
-
-  private stopRefreshing() {
+  stopRefreshing() {
     this.isRequesting = false;
   }
 
