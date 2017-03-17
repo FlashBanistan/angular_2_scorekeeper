@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
-import { AppRoutingModule } from './app-routing.module';
+import { AppRouter } from './app.router';
 import { AuthenticationModule } from './authentication/authentication.module';
 import { SharedModule } from './shared/shared.module';
 
@@ -23,7 +23,7 @@ import { AppComponent } from './app.component';
     AuthenticationModule,
     SharedModule,
     //BooksAndRunModule,
-    AppRoutingModule,
+    AppRouter,
   ],
   providers: [  ],
   bootstrap: [AppComponent]
