@@ -9,7 +9,7 @@ export class BooksAndRunService {
       console.log('books_and_run.service instantiated...');
     }
 
-    players: Player[];
+    players: Player[] = [];
 
     getPlayers() {
         return this.players;

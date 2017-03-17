@@ -8,7 +8,7 @@ import { AuthenticationModule } from './authentication/authentication.module';
 import { SharedModule } from './shared/shared.module';
 
 import { AppComponent } from './app.component';
-import { BooksAndRunModule } from './books_and_run/books_and_run.module';
+//import { BooksAndRunModule } from './books_and_run/books_and_run.module';
 
 
 
@@ -20,10 +20,10 @@ import { BooksAndRunModule } from './books_and_run/books_and_run.module';
     BrowserModule,
     FormsModule,
     HttpModule,
-    AppRoutingModule,
     AuthenticationModule,
     SharedModule,
-    BooksAndRunModule,
+    //BooksAndRunModule,
+    AppRoutingModule,
   ],
   providers: [  ],
   bootstrap: [AppComponent]
