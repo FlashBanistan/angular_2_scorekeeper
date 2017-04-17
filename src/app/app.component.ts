@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from './authentication/authentication.service';
+import { JwtHelper } from 'angular2-jwt';
 
 @Component({
   selector: 'app-root',
@@ -23,8 +24,11 @@ export class AppComponent implements OnInit {
       this.authenticationService.getToken(username, password)
         .subscribe(
           response => {
-            localStorage.setItem('jwt_token', response.json().token);
-            localStorage.setItem('user', JSON.stringify(response.json().user));
+            localStorage.setItem('token', response.json().token);
+            var token = localStorage.getItem('token')
+            var jwtHelper = new JwtHelper();
+            var user = jwtHelper.decodeToken(token);
+            localStorage.setItem('user', JSON.stringify(user))
             this.user = JSON.parse(localStorage.getItem('user'));
           }
         )

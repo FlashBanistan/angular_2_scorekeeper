@@ -20,7 +20,8 @@ export class FriendService {
   getFriendList() {
     var user = JSON.parse(localStorage.getItem('user'));
     return this.http
-      .get('https://django-scorekeeper-api.herokuapp.com/api/users/friendlist/' + user.pk + '/')
+      // 'https://django-scorekeeper-api.herokuapp.com/api/users/friendlist/'
+      .get('http://localhost:8000/api/users/friendlist/' + user.user_id + '/')
       .map(
       res => res.json().friends as FriendList[],
     )

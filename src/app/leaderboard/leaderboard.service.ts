@@ -20,8 +20,11 @@ export class LeaderboardService {
 
 
     getStatistics() {
-        return this.http.get('https://django-scorekeeper-api.herokuapp.com/api/books_and_run/statistics/')
-            .map(res => res.json() as Statistics[])
+      // 'https://django-scorekeeper-api.herokuapp.com/api/books_and_run/statistics/'
+        return this.http.get('http://localhost:8000/api/books_and_run/statistics/')
+            .map(
+              res => res.json() as Statistics[]
+            )
     }
 
 

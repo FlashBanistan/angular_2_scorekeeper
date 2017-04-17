@@ -19,19 +19,6 @@ import { Statistics } from './statistics';
 export class LeaderboardComponent implements OnInit {
   constructor(private leaderboardService: LeaderboardService) {}
 
-
-  ngOnInit(): void {
-    this.isRequesting = true;
-     this.leaderboardService
-      .getStatistics()
-        .subscribe(
-                  data => this.statistics = data,
-                  () => this.stopRefreshing(),
-                  () => this.stopRefreshing(),
-              )
-  }
-
-
   isRequesting: boolean;
   statistics: Statistics[] = [];
   categories: any[] = [
@@ -53,9 +40,23 @@ export class LeaderboardComponent implements OnInit {
     }
   ];
 
+
+  ngOnInit(): void {
+    this.isRequesting = true;
+     this.leaderboardService
+      .getStatistics()
+        .subscribe(
+                  data => this.statistics = data,
+                  () => this.stopRefreshing(),
+                  () => this.stopRefreshing(),
+              )
+  }
+
+
   stopRefreshing() {
     this.isRequesting = false;
   }
+
 
   sort(category, stats): void {
     switch(category.title) {

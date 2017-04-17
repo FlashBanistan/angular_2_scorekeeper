@@ -20,13 +20,13 @@ export class AuthenticationService {
 
         var headers = new Headers();
         headers.append('Content-Type', 'application/json');
-
-        return this.http.post('https://django-scorekeeper-api.herokuapp.com/api/auth/get_token/', JSON.stringify(creds), {headers: headers})
+        // 'https://django-scorekeeper-api.herokuapp.com/api/auth/get_token/'
+        return this.http.post('http://localhost:8000/api/auth/get_token/', JSON.stringify(creds), {headers: headers})
 
     }
 
     clearToken() {
-      localStorage.removeItem('jwt_token');
+      localStorage.removeItem('token');
       localStorage.removeItem('user');
     }
 
@@ -35,8 +35,8 @@ export class AuthenticationService {
 
       var headers = new Headers();
       headers.append('Content-Type', 'application/json');
-
-      this.http.post('https://django-scorekeeper-api.herokuapp.com/api/auth/verifyToken/', token, {headers: headers})
+      // 'https://django-scorekeeper-api.herokuapp.com/api/auth/verifyToken/'
+      this.http.post('http://localhost:8000/api/auth/verifyToken/', token, {headers: headers})
         .subscribe(
           response => {
 
