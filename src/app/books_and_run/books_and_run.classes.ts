@@ -46,4 +46,18 @@ export class Score {
 
       return total;
     }
+    isComplete() {
+      for(var key in this) {
+        if(this.hasOwnProperty(key)) {
+          if(this[key].toString() === "") {
+            return false;
+          }
+        }
+      }
+      return true;
+    }
+
+
+
+
 }

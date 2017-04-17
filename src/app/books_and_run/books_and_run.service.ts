@@ -4,20 +4,21 @@ import { Game, Player, Score, Round } from './books_and_run.classes'
 
 
 @Injectable()
-export class BooksAndRunService {
-    constructor(){
-      console.log('books_and_run.service instantiated...');
-    }
+export class BooksAndRunService {constructor(){}
+
 
     players: Player[] = [];
+
 
     getPlayers() {
         return this.players;
     }
 
+
     addPlayer(player) {
         this.players.push(player);
     }
+
 
     removePlayer(player) {
         for(var i=0; i<this.players.length; i++) {
@@ -27,9 +28,11 @@ export class BooksAndRunService {
         }
     }
 
+
     resetPlayers() {
         this.players = [];
     }
+
 
     prepareGame(){
       // Initialize game variables
@@ -91,7 +94,7 @@ export class BooksAndRunService {
 
       // Attach a 'scores' property to each player in the game
       players.forEach(function(player){
-          player['scores'] = new Score(null);
+          player['scores'] = new Score("");
       });
 
       // Attach the initalized variables to the game.
@@ -102,46 +105,29 @@ export class BooksAndRunService {
 
     }
 
+
     restoreGame() {
       var game;
-      game = JSON.parse(localStorage.getItem('game'));
-
-      game.players.forEach(function(player){
-        player.scores.getTotal = function(){
-          let total = 0;
-          if(!isNaN(parseInt(this.roundOne))) total+=parseInt(this.roundOne);
-          if(!isNaN(parseInt(this.roundTwo))) total+=parseInt(this.roundTwo);
-          if(!isNaN(parseInt(this.roundThree))) total+=parseInt(this.roundThree);
-          if(!isNaN(parseInt(this.roundFour))) total+=parseInt(this.roundFour);
-          if(!isNaN(parseInt(this.roundFive))) total+=parseInt(this.roundFive);
-          if(!isNaN(parseInt(this.roundSix))) total+=parseInt(this.roundSix);
-          if(!isNaN(parseInt(this.roundSeven))) total+=parseInt(this.roundSeven);
-
-          return total;
-        };
-      });
+      game = JSON.parse(localStorage.getItem('game'))
+      game.players.forEach(function(player) {
+        Object.setPrototypeOf(player.scores, Score.prototype)
+      })
 
       return game;
-
     }
+
 
     saveGame(game) {
       localStorage.setItem('game', JSON.stringify(game));
     }
 
+
     isGameFinished(game) {
-      game.players.forEach(function(player) {
-        console.log(player)
-        for(var key in player.scores) {
-          if(key !== 'getTotal') {
-            if(player.scores[key] === null || player.scores[key] ==="") {
-              // alert("Game is not finished!")
-              return false;
-            }
-          }
+      for(var i in game.players) {
+        for(var key in game.players[i].scores) {
+          console.log(key)
         }
-        return true;
-      })
+      }
     }
 
 
