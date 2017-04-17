@@ -2,13 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from './authentication/authentication.service';
 import { JwtHelper } from 'angular2-jwt';
 
+
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  constructor(private authenticationService: AuthenticationService ) { }
+  constructor(private authenticationService: AuthenticationService) {}
 
   title = 'Cardly';
   user = {};

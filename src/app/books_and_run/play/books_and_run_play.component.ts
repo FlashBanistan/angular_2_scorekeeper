@@ -13,7 +13,7 @@ import { Score } from '../books_and_run.classes';
 
 
 export class BooksAndRunPlayComponent implements OnInit, AfterViewChecked {
-  constructor(public booksAndRunService: BooksAndRunService) { }
+  constructor(public booksAndRunService: BooksAndRunService) {}
 
   game = { players: []};
 
