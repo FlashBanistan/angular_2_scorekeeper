@@ -2,6 +2,9 @@ import { Component, OnInit, AfterViewChecked } from '@angular/core';
 import { BooksAndRunService } from '../books_and_run.service';
 import { Score } from '../books_and_run.classes';
 
+import {ViewContainerRef} from '@angular/core';
+import {ToastsManager, Toast} from 'ng2-toastr';
+
 
 
 @Component({
@@ -13,7 +16,9 @@ import { Score } from '../books_and_run.classes';
 
 
 export class BooksAndRunPlayComponent implements OnInit, AfterViewChecked {
-  constructor(public booksAndRunService: BooksAndRunService) {}
+  constructor(public booksAndRunService: BooksAndRunService, private toastr: ToastsManager, vRef: ViewContainerRef) {
+    this.toastr.setRootViewContainerRef(vRef);
+  }
 
   game = { players: []};
 
@@ -40,6 +45,7 @@ export class BooksAndRunPlayComponent implements OnInit, AfterViewChecked {
     // Check that the game is finished:
     if(this.booksAndRunService.isGameFinished(game)) {
       console.log("Game is finished.  Continuing...")
+      this.toastr.success('You are awesome!', 'Success!', {toastLife: 3000, showCloseButton: false});
       // Determine number of rounds won for each player:
       // Determine total score for each player:
       // Determine winner of game:
