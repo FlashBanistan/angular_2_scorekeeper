@@ -38,16 +38,13 @@ export class BooksAndRunPlayComponent implements OnInit, AfterViewChecked {
 
   recordStats(game) {
     // Check that the game is finished:
-    for(var i in game.players) {
-      if(!game.players[i].scores.isComplete()) {
-        alert("Game is NOT complete!")
-        return
-      }
+    if(this.booksAndRunService.isGameFinished(game)) {
+      console.log("Game is finished.  Continuing...")
+      // Determine number of rounds won for each player:
+      // Determine total score for each player:
+      // Determine winner of game:
     }
-    // console.log(this.booksAndRunService.isGameFinished(game))
-    // Determine number of rounds won for each player:
-    // Determine total score for each player:
-    // Determine winner of game:
+    else console.log("Game is not finished. Going to raise a toast error...")
   }
 
 

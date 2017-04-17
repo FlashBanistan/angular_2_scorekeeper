@@ -124,10 +124,11 @@ export class BooksAndRunService {constructor(){}
 
     isGameFinished(game) {
       for(var i in game.players) {
-        for(var key in game.players[i].scores) {
-          console.log(key)
+        if(!game.players[i].scores.isComplete()) {
+          return false;
         }
       }
+      return true;
     }
 
 
