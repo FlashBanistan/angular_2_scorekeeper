@@ -50,7 +50,7 @@ export class BooksAndRunPlayComponent implements OnInit, AfterViewChecked {
       // Determine total score for each player:
       // Determine winner of game:
     }
-    else console.log("Game is not finished. Going to raise a toast error...")
+    else this.toastr.warning('Please finish the game first.');
   }
 
 
