@@ -28,11 +28,21 @@ export class BooksAndRunPlayComponent implements OnInit, AfterViewChecked {
     } else {
         this.game = this.booksAndRunService.restoreGame();
     };
-
   }
+
 
   ngAfterViewChecked() {
     this.booksAndRunService.saveGame(this.game);
   }
+
+
+  recordStats(game) {
+    // Check that the game is finished:
+    console.log(this.booksAndRunService.isGameFinished(game))
+    // Determine number of rounds won for each player:
+    // Determine total score for each player:
+    // Determine winner of game:
+  }
+
 
 }

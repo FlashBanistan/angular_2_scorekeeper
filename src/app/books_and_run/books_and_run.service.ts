@@ -129,8 +129,19 @@ export class BooksAndRunService {
       localStorage.setItem('game', JSON.stringify(game));
     }
 
-    incrementGamesPlayed() {
-
+    isGameFinished(game) {
+      game.players.forEach(function(player) {
+        console.log(player)
+        for(var key in player.scores) {
+          if(key !== 'getTotal') {
+            if(player.scores[key] === null || player.scores[key] ==="") {
+              // alert("Game is not finished!")
+              return false;
+            }
+          }
+        }
+        return true;
+      })
     }
 
 

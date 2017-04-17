@@ -22,7 +22,8 @@
         <td class="text-center" contenteditable="true" [textContent]="player.scores.roundSix"   (input)="player.scores.roundSix = $event.target.textContent"></td>
         <td class="text-center" contenteditable="true" [textContent]="player.scores.roundSeven"   (input)="player.scores.roundSeven = $event.target.textContent"></td>
         <td class="text-center"><h5>{{ player.scores.getTotal() }}</h5></td>
-
       </tr>
     </tbody>
   </table>
+
+  <button class="btn btn-success" type="button" (click)="recordStats(game)">Record Stats</button>
