@@ -2,6 +2,7 @@
 import { Component, OnInit, AfterViewChecked } from '@angular/core';
 import { BooksAndRunService } from '../books_and_run.service';
 import { Score } from '../books_and_run.classes';
+import { Observable } from 'rxjs/Rx';
 
 // 3rd PARTY IMPORTS
 import {ViewContainerRef} from '@angular/core';
@@ -71,6 +72,7 @@ export class BooksAndRunPlayComponent implements OnInit, AfterViewChecked {
       for(var i=0; i<players.length; i++) {
         if(players[i].score < lowScore) {
           winner = players[i].pk
+          lowScore = players[i].score
         }
       }
 
@@ -83,12 +85,21 @@ export class BooksAndRunPlayComponent implements OnInit, AfterViewChecked {
           player['is_winner'] = false;
         }
       })
-      
+
       // Push the stats to the database:
+      for(var i=0; i<players.length; i++) {
+        this.booksAndRunService.savePlayerStats(players[i])
+          .map(
+            (res => res.json()),
+          )
+          .subscribe(
+            (result => this.toastr
+              .success(result.user.username + ', has been saved.', 'Success!', {toastLife: 5000, showCloseBUtton: false})),
+            (error => this.toastr
+              .error(error.statusText + '.  Write your stats down before resetting the game.', 'Failure!', {toastLife: 5000, showCloseBUtton: false}))
+          )
+      }
 
-
-      // Let the user know the operation was a success:
-      this.toastr.success('Stats recorded!', 'Success!', {toastLife: 3000, showCloseButton: false});
     }
     else this.toastr.warning('Please finish the game first.');
   }

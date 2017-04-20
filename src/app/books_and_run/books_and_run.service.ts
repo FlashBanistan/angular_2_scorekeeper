@@ -4,7 +4,7 @@ import { Game, Player, Score, Round } from './books_and_run.classes'
 
 
 @Injectable()
-export class BooksAndRunService {constructor(){}
+export class BooksAndRunService {constructor(private http: Http){}
 
 
     players: Player[] = [];
@@ -129,6 +129,12 @@ export class BooksAndRunService {constructor(){}
         }
       }
       return true;
+    }
+
+    savePlayerStats(player) {
+      let headers = new Headers({ 'Content-Type': 'application/json' });
+
+      return this.http.put('http://localhost:8000/api/books_and_run/statistics/' + player.pk + '/', JSON.stringify(player), {headers: headers});
     }
 
 
