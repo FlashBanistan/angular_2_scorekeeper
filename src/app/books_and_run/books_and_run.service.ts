@@ -122,6 +122,12 @@ export class BooksAndRunService {constructor(private http: Http){}
     }
 
 
+    deleteGame() {
+      return localStorage.removeItem('game');
+      // return "Game deleted succesfully!"
+    }
+
+
     gameFinished(game) {
       for(var i in game.players) {
         if(!game.players[i].scores.isComplete()) {

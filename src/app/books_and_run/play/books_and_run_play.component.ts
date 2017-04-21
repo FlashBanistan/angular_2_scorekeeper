@@ -101,7 +101,17 @@ export class BooksAndRunPlayComponent implements OnInit, AfterViewChecked {
       }
 
     }
-    else this.toastr.warning('Please finish the game first.');
+    else this.toastr.warning('Please finish the game.');
+  }
+
+  resetGame() {
+    this.game.players.forEach(function(player) {
+      player.scores = new Score("");
+    })
+  }
+
+  createNewGame() {
+    this.booksAndRunService.deleteGame()
   }
 
 

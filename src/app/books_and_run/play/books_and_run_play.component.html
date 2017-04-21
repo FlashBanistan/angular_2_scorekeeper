@@ -26,4 +26,8 @@
     </tbody>
   </table>
 
-  <button class="btn btn-success" type="button" (click)="recordStats(game)">Record Stats</button>
+  <div class="btn-group">
+    <button class="btn btn-success" type="button" (click)="recordStats(game)">Record Stats</button>
+    <button class="btn btn-primary" type="button" (click)="resetGame()">Reset Game</button>
+    <button class="btn btn-info" type="button" (click)="createNewGame()">New Game</button>
+  </div>
