@@ -22,7 +22,7 @@ export class BooksAndRunService {constructor(private http: Http){}
 
     removePlayer(player) {
         for(var i=0; i<this.players.length; i++) {
-            if(this.players[i].pk === player.pk) {
+            if(this.players[i].url == player.url) {
                 this.players.splice(i, 1);
             }
         }

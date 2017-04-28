@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { FriendList } from '../../friendlist';
+import { Friend } from '../../friend';
 import { FriendService } from '../../friend.service';
 import { BooksAndRunService } from '../books_and_run.service';
 
@@ -18,8 +18,8 @@ export class BooksAndRunCreateComponent implements OnInit {
   constructor(public friendService: FriendService, private booksAndRunService: BooksAndRunService, private router: Router) { }
 
   isRequesting: boolean;
-  name: string = 'Aaron';
-  friendList: FriendList[] = [];
+  // friendList: Friend[] = [];
+  friendList = [];
   players: any[] = [];
 
   private stopRefreshing() {
@@ -33,6 +33,7 @@ export class BooksAndRunCreateComponent implements OnInit {
     this.friendService
       .getFriendList()
         .subscribe(
+          // data => this.friendList = data,
           data => this.friendList = data,
           () => this.stopRefreshing(),
           () => this.stopRefreshing(),
@@ -42,7 +43,7 @@ export class BooksAndRunCreateComponent implements OnInit {
   addPlayer(player): void {
     this.booksAndRunService.addPlayer(player);
     for(var i=0; i<this.friendList.length; i++) {
-            if(this.friendList[i].pk === player.pk) {
+            if(this.friendList[i].url === player.url) {
                 this.friendList.splice(i, 1);
             }
         }

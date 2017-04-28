@@ -94,9 +94,9 @@ export class BooksAndRunPlayComponent implements OnInit, AfterViewChecked {
           )
           .subscribe(
             (result => this.toastr
-              .success(result.user.username + ', has been saved.', 'Success!', {toastLife: 5000, showCloseBUtton: false})),
+              .success(result.user.username + ', has been saved.', 'Success!', {toastLife: 5000, showCloseButton: false})),
             (error => this.toastr
-              .error(error.statusText + '.  Write your stats down before resetting the game.', 'Failure!', {toastLife: 5000, showCloseBUtton: false}))
+              .error(error.statusText + '.  Write your stats down before resetting the game.', 'Failure!', {toastLife: 5000, showCloseButton: false}))
           )
       }
 
@@ -111,7 +111,7 @@ export class BooksAndRunPlayComponent implements OnInit, AfterViewChecked {
   }
 
   createNewGame() {
-    this.booksAndRunService.deleteGame()
+    // this.booksAndRunService.deleteGame()
   }
 
 

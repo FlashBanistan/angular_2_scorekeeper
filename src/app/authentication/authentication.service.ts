@@ -12,7 +12,7 @@ export class AuthenticationService {
     constructor(private http: Http, private router: Router) { }
 
 
-    getToken(username, password) {console.log('getting token');
+    getToken(username, password) {
         var creds = {
           username: username,
           password: password,
@@ -25,10 +25,12 @@ export class AuthenticationService {
 
     }
 
+
     clearToken() {
       localStorage.removeItem('token');
       localStorage.removeItem('user');
     }
+
 
     verifyToken() {
       var token = localStorage.getItem('jwt_token');
@@ -43,6 +45,7 @@ export class AuthenticationService {
           }
         )
     }
+
 
     private handleError(error: any): Promise<any> {
         console.error('An error occurred', error); // for demo purposes only

@@ -15,6 +15,7 @@ export class Player {
     last_name: string;
     pk: number;
     score: Score[];
+    url: string;
 }
 
 export class Score {
