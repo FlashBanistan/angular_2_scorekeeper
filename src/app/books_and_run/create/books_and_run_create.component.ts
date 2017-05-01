@@ -29,8 +29,6 @@ export class BooksAndRunCreateComponent implements OnInit {
 
   ngOnInit(): void {
     this.booksAndRunService.resetPlayers();
-    this.booksAndRunService.addPlayer(JSON.parse(localStorage.getItem('user')))
-    this.players = this.booksAndRunService.getPlayers();
     this.isRequesting = true;
     this.friendService
       .getFriendList()
