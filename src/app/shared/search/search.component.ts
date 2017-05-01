@@ -37,7 +37,7 @@ export class FriendSearchComponent implements OnInit {
 
   ngOnInit(): void {
     this.friends = this.searchTerms
-      .debounceTime(300)        // wait for 300ms pause in events
+      .debounceTime(1000)        // wait for 300ms pause in events
       .distinctUntilChanged()   // ignore if next search term is same as previous
       .switchMap(term => term   // switch to new observable each time
         // return the http search observable
@@ -51,8 +51,5 @@ export class FriendSearchComponent implements OnInit {
       });
   }
 
-  // gotoDetail(hero: Hero): void {
-  //   let link = ['/detail', hero.id];
-  //   this.router.navigate(link);
-  // }
+
 }
