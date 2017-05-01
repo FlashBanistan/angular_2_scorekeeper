@@ -4,6 +4,9 @@ import { BooksAndRunService } from '../books_and_run.service';
 import { Score } from '../books_and_run.classes';
 import { Observable } from 'rxjs/Rx';
 
+import { FriendService } from '../../friend.service';
+import { Friend } from '../../friend';
+
 // 3rd PARTY IMPORTS
 import {ViewContainerRef} from '@angular/core';
 import {ToastsManager, Toast} from 'ng2-toastr';
@@ -19,18 +22,30 @@ import {ToastsManager, Toast} from 'ng2-toastr';
 
 
 export class BooksAndRunPlayComponent implements OnInit, AfterViewChecked {
-  constructor(public booksAndRunService: BooksAndRunService, private toastr: ToastsManager, vRef: ViewContainerRef) {
-    this.toastr.setRootViewContainerRef(vRef);
-  }
+  public game;
+  public friends: Friend[];
 
-  game = { players: [] };
+  constructor(
+    public booksAndRunService: BooksAndRunService,
+    private toastr: ToastsManager, vRef: ViewContainerRef,
+    private friendService: FriendService
+  ) {
+    this.toastr.setRootViewContainerRef(vRef);
+
+  }
 
 
   ngOnInit(): void {
+    this.friendService.getFriendList()
+      .subscribe(
+        results => this.friends=results,
+        error => this.toastr.error('Error fetching friends list.', 'Failure!', { toastLife: 5000, showCloseButton: false })
+      );
+
     // Either restore game or create a new one:
     if (localStorage.getItem('game') === null) {
       this.game = this.booksAndRunService.prepareGame();
-      this.booksAndRunService.saveGame(this.game);
+      // this.booksAndRunService.saveGame(this.game);
     } else {
       this.game = this.booksAndRunService.restoreGame();
     };
@@ -39,7 +54,7 @@ export class BooksAndRunPlayComponent implements OnInit, AfterViewChecked {
 
   ngAfterViewChecked() {
     // Saves the game after every keystroke:
-    this.booksAndRunService.saveGame(this.game);
+    // this.booksAndRunService.saveGame(this.game);
   }
 
 
@@ -52,6 +67,7 @@ export class BooksAndRunPlayComponent implements OnInit, AfterViewChecked {
 
   createNewGame() {
     // this.booksAndRunService.deleteGame()
+    console.log(this.friends)
   }
 
 

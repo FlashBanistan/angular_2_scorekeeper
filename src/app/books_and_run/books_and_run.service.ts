@@ -6,7 +6,7 @@ import { Game, Player, Score, Round } from './books_and_run.classes'
 @Injectable()
 export class BooksAndRunService {constructor(private http: Http){}
 
-
+    user = JSON.parse(localStorage.getItem('user'));
     players: Player[] = [];
 
 
@@ -35,74 +35,7 @@ export class BooksAndRunService {constructor(private http: Http){}
 
 
     prepareGame(){
-      // Initialize game variables
-      let players: Player[] = this.getPlayers();
-      let rounds: Round[] = [
-        {
-            roundNumber: 1,
-            title: "Round 1",
-            description: "2 Books",
-            winner: undefined,
-        },
-        {
-            roundNumber: 2,
-            title: "Round 2",
-            description: "1 Book 1 Run",
-            winner: undefined,
-        },
-        {
-            roundNumber: 3,
-            title: "Round 3",
-            description: "2 Runs",
-            winner: undefined,
-        },
-        {
-            roundNumber: 4,
-            title: "Round 4",
-            description: "3 Books",
-            winner: undefined,
-        },
-        {
-            roundNumber: 5,
-            title: "Round 5",
-            description: "2 Books 1 Run",
-            winner: undefined,
-        },
-        {
-            roundNumber: 6,
-            title: "Round 6",
-            description: "2 Runs 1 Book",
-            winner: undefined,
-         },
-        {
-            roundNumber: 7,
-            title: "Round 7",
-            description: "3 Runs",
-            winner: undefined,
-        },
-        {
-            roundNumber: 0,
-            title: "Total",
-            description: "undefined",
-            winner: undefined,
-        },
-      ];
-      let game: Game = {
-        players: [],
-        rounds: [],
-      };
-
-      // Attach a 'scores' property to each player in the game
-      players.forEach(function(player){
-          player['scores'] = new Score("");
-      });
-
-      // Attach the initalized variables to the game.
-      game.players = players;
-      game.rounds = rounds;
-
-      return game;
-
+      return new Game;
     }
 
 
