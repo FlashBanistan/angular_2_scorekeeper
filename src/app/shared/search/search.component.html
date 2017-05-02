@@ -1,9 +1,11 @@
-<div id="search-component">
-  <h4>Friend Search</h4>
-  <input #searchBox id="search-box" (keyup)="search(searchBox.value)" />
-  <div>
-    <div *ngFor="let friend of friends | async" class="search-result" >
-      {{friend.username}}
-    </div>
-  </div>
-</div>
+<br>
+<br>
+<input placeholder="Search friends..." (keyup)="searchTerm$.next($event.target.value)">
+<br>
+<br>
+<span *ngIf="results[0]">
+  <h4>Add to game</h4>
+  <button class="btn-default" *ngFor="let result of results">
+    {{ result.username }}
+  </button>
+</span>

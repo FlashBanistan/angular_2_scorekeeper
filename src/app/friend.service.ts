@@ -41,32 +41,21 @@ export class FriendService {
 
 
 
+search(terms: Observable<string>) {
+  return terms.debounceTime(700)
+    .distinctUntilChanged()
+    .switchMap(term => this.searchEntries(term));
+}
 
-
-  search(term: string): Observable<Friend[]> {
-    var user = JSON.parse(localStorage.getItem('user'));
-
-    return this.http
-      .get('http://localhost:8000/api/users/friendlist/' + user.user_id + '/')
-        .map((r: Response) => r.json().data as Friend[])
-          .catch((error: any) => {
-            console.error('An friendly error occurred', error);
-            return Observable.throw(error.message || error);
-      });
-  }
-
-
+searchEntries(term) {
+  var user = JSON.parse(localStorage.getItem('user'));
+  return this.http
+    .get('http://localhost:8000/api/friendlist/' + user.user_id + '/' + 'get_friend/?username=' + term )
+    .map(res => res.json());
+}
 
 
 
-
-
-
-
-  private handleError(error: any): Promise<any> {
-    console.error('An error occurred', error); // for demo purposes only
-    return Promise.reject(error.message || error);
-  }
 
 
 }

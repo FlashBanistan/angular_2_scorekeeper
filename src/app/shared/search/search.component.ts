@@ -23,33 +23,21 @@ import 'rxjs/add/operator/switchMap';
 
 
 
-export class FriendSearchComponent implements OnInit {
-  friends: Observable<Friend[]>;
-  private searchTerms = new Subject<string>();
+export class FriendSearchComponent {
+  results = [];
+  searchTerm$ = new Subject<string>();
 
-  constructor(private friendService: FriendService) { }
-  // constructor(private friendService: FriendService, private router: Router) { }
 
-  search(term: string): void {
-    // Push a search term into the observable stream.
-    this.searchTerms.next(term);
-  }
-
-  ngOnInit(): void {
-    this.friends = this.searchTerms
-      .debounceTime(1000)        // wait for 300ms pause in events
-      .distinctUntilChanged()   // ignore if next search term is same as previous
-      .switchMap(term => term   // switch to new observable each time
-        // return the http search observable
-        ? this.friendService.search(term)
-        // or the observable of empty heroes if no search term
-        : Observable.of<Friend[]>([]))
-      .catch(error => {
-        // TODO: real error handling
-        console.log(`Error in component ... ${error}`);
-        return Observable.of<Friend[]>([]);
+  constructor(private friendService: FriendService) {
+    this.friendService.search(this.searchTerm$)
+      .subscribe(results => {
+        this.results = [];
+        this.results.push(results)
+        console.log(this.results)
       });
   }
+
+
 
 
 }
