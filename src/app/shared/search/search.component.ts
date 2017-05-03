@@ -32,7 +32,6 @@ export class FriendSearchComponent {
     this.friendService.search(this.searchTerm$)
       .subscribe(results => {
         this.results = results
-        console.log(this.results)
       });
   }
 
