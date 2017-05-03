@@ -42,7 +42,7 @@ export class FriendService {
 
 
 search(terms: Observable<string>) {
-  return terms.debounceTime(700)
+  return terms.debounceTime(300)
     .distinctUntilChanged()
     .switchMap(term => this.searchEntries(term));
 }

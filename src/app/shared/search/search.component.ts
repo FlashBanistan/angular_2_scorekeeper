@@ -31,8 +31,7 @@ export class FriendSearchComponent {
   constructor(private friendService: FriendService) {
     this.friendService.search(this.searchTerm$)
       .subscribe(results => {
-        this.results = [];
-        this.results.push(results)
+        this.results = results
         console.log(this.results)
       });
   }
