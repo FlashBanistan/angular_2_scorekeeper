@@ -16,8 +16,21 @@ import 'rxjs/add/operator/switchMap';
 @Component({
   moduleId: module.id,
   selector: 'friend-search',
-  templateUrl: './search.component.html',
-  styleUrls: ['./search.component.css'],
+  template: `
+      <div class="row">
+        <div class="col-md-12">
+          <input placeholder="Search friends..." (keyup)="searchTerm$.next($event.target.value)">
+          <span *ngIf="results[0]">
+            <button class="btn btn-sm btn-secondary" *ngFor="let result of results">
+              {{ result.username }}
+            </button>
+          </span>
+        </div>
+      </div>
+  `,
+  styles: [
+    '.row { padding-top: 15px; padding-bottom: 15px }'
+  ],
   providers: [FriendService]
 })
 

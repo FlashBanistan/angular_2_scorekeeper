@@ -21,38 +21,19 @@ import 'rxjs/add/observable/throw';
 export class FriendService {
   constructor(private http: Http) {}
 
-  private headers = new Headers({ 'Content-Type': 'application/json' });
-  //private statisticsUrl = 'asdf/asdf';
+  user = JSON.parse(localStorage.getItem('user'));
 
-  getFriendList() {
-    var user = JSON.parse(localStorage.getItem('user'));
-    return this.http
-      // 'https://django-scorekeeper-api.herokuapp.com/api/users/friendlist/'
-      .get('http://localhost:8000/api/friendlist/' + user.user_id + '/')
-      .map(
-      // res => res.json().friends as Friend[],
-      res => res.json().friends,
-    )
+  search(terms: Observable<string>) {
+    return terms.debounceTime(250)
+      .distinctUntilChanged()
+      .switchMap(term => this.searchEntries(term));
   }
 
-
-
-
-
-
-
-search(terms: Observable<string>) {
-  return terms.debounceTime(300)
-    .distinctUntilChanged()
-    .switchMap(term => this.searchEntries(term));
-}
-
-searchEntries(term) {
-  var user = JSON.parse(localStorage.getItem('user'));
-  return this.http
-    .get('http://localhost:8000/api/friendlist/' + user.user_id + '/' + 'get_friend/?username=' + term )
-    .map(res => res.json());
-}
+  searchEntries(term) {
+    return this.http
+      .get('http://localhost:8000/api/friendlist/' + this.user.user_id + '/get_friend/?username=' + term )
+      .map(res => res.json());
+  }
 
 
 
