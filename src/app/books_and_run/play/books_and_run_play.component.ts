@@ -4,7 +4,6 @@ import { BooksAndRunService } from '../books_and_run.service';
 import { Score } from '../books_and_run.classes';
 import { Observable } from 'rxjs/Rx';
 
-import { FriendService } from '../../friend.service';
 import { Friend } from '../../friend';
 
 // 3rd PARTY IMPORTS
@@ -28,7 +27,6 @@ export class BooksAndRunPlayComponent implements OnInit, AfterViewChecked {
   constructor(
     public booksAndRunService: BooksAndRunService,
     private toastr: ToastsManager, vRef: ViewContainerRef,
-    private friendService: FriendService
   ) {
     this.toastr.setRootViewContainerRef(vRef);
 
@@ -36,12 +34,6 @@ export class BooksAndRunPlayComponent implements OnInit, AfterViewChecked {
 
 
   ngOnInit(): void {
-    this.friendService.getFriendList()
-      .subscribe(
-        results => this.friends=results,
-        error => this.toastr.error('Error fetching friends list.', 'Failure!', { toastLife: 5000, showCloseButton: false })
-      );
-
     // Either restore game or create a new one:
     if (localStorage.getItem('game') === null) {
       this.game = this.booksAndRunService.prepareGame();
