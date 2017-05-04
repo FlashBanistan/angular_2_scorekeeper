@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 
@@ -20,31 +20,27 @@ import 'rxjs/add/operator/switchMap';
       <div class="row">
         <div class="col-md-12">
           <input placeholder="Search friends..." (keyup)="searchTerm$.next($event.target.value)">
-          <span *ngIf="results[0]">
-            <button class="btn btn-sm btn-secondary" *ngFor="let result of results">
-              {{ result.username }}
-            </button>
-          </span>
         </div>
       </div>
   `,
-  styles: [
-    '.row { padding-top: 15px; padding-bottom: 15px }'
-  ],
+  // styles: [
+  //   '.row { padding-top: 15px; padding-bottom: 15px }'
+  // ],
   providers: [FriendService]
 })
 
 
 
 export class FriendSearchComponent {
-  results = [];
+  @Output() sendFriends = new EventEmitter();
+
   searchTerm$ = new Subject<string>();
 
 
   constructor(private friendService: FriendService) {
     this.friendService.search(this.searchTerm$)
       .subscribe(results => {
-        this.results = results
+        this.sendFriends.emit(results);
       });
   }
 

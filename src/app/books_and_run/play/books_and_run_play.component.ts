@@ -5,6 +5,7 @@ import { Score } from '../books_and_run.classes';
 import { Observable } from 'rxjs/Rx';
 
 import { Friend } from '../../friend';
+// import { FriendSearchComponent } from '../../shared/search/search.component';
 
 // 3rd PARTY IMPORTS
 import {ViewContainerRef} from '@angular/core';
@@ -16,13 +17,14 @@ import {ToastsManager, Toast} from 'ng2-toastr';
   moduleId: module.id,
   selector: 'books-and-run-play',
   templateUrl: './books_and_run_play.component.html',
+  // directives: [FriendSearchComponent],
   styleUrls: ['./books_and_run_play.component.css'],
 })
 
 
 export class BooksAndRunPlayComponent implements OnInit, AfterViewChecked {
   public game;
-  public friends: Friend[];
+  public friends: Friend[] = [];
 
   constructor(
     public booksAndRunService: BooksAndRunService,
@@ -30,6 +32,16 @@ export class BooksAndRunPlayComponent implements OnInit, AfterViewChecked {
   ) {
     this.toastr.setRootViewContainerRef(vRef);
 
+  }
+
+  onReceiveFriends(friends):void {
+    this.friends = friends;
+  }
+
+  addFriendToGame(friend) {
+    let player = friend;
+    player['scores'] = new Score('');
+    this.game.players.push(player);
   }
 
 
