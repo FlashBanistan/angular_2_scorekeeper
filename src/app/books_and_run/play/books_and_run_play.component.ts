@@ -39,9 +39,14 @@ export class BooksAndRunPlayComponent implements OnInit, AfterViewChecked {
   }
 
   addFriendToGame(friend) {
-    let player = friend;
-    player['scores'] = new Score('');
-    this.game.players.push(player);
+    friend['scores'] = new Score('');
+    if(this.game.players.find(function(player) {
+      return friend.pk === player.pk
+    })) {
+      return this.toastr
+        .error("Player already in game!", "Failure!", { toastLife: 4000, showCloseButton: false })
+    }
+    this.game.players.push(friend);
   }
 
 
