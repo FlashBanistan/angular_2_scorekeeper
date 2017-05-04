@@ -47,6 +47,7 @@ export class BooksAndRunPlayComponent implements OnInit, AfterViewChecked {
         .error("Player already in game!", "Failure!", { toastLife: 4000, showCloseButton: false })
     }
     this.game.players.push(friend);
+    this.friends = [];
   }
 
 
