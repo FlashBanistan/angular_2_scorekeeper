@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 
@@ -16,43 +16,35 @@ import 'rxjs/add/operator/switchMap';
 @Component({
   moduleId: module.id,
   selector: 'friend-search',
-  templateUrl: './search.component.html',
-  styleUrls: ['./search.component.css'],
+  template: `
+      <div class="row">
+        <div class="col-md-12">
+          <input placeholder="Search friends..." (keyup)="searchTerm$.next($event.target.value)">
+        </div>
+      </div>
+  `,
+  // styles: [
+  //   '.row { padding-top: 15px; padding-bottom: 15px }'
+  // ],
   providers: [FriendService]
 })
 
 
 
-export class FriendSearchComponent implements OnInit {
-  friends: Observable<Friend[]>;
-  private searchTerms = new Subject<string>();
+export class FriendSearchComponent {
+  @Output() sendFriends = new EventEmitter();
 
-  constructor(private friendService: FriendService) { }
-  // constructor(private friendService: FriendService, private router: Router) { }
+  searchTerm$ = new Subject<string>();
 
-  search(term: string): void {
-    // Push a search term into the observable stream.
-    this.searchTerms.next(term);
-  }
 
-  ngOnInit(): void {
-    this.friends = this.searchTerms
-      .debounceTime(300)        // wait for 300ms pause in events
-      .distinctUntilChanged()   // ignore if next search term is same as previous
-      .switchMap(term => term   // switch to new observable each time
-        // return the http search observable
-        ? this.friendService.search(term)
-        // or the observable of empty heroes if no search term
-        : Observable.of<Friend[]>([]))
-      .catch(error => {
-        // TODO: real error handling
-        console.log(`Error in component ... ${error}`);
-        return Observable.of<Friend[]>([]);
+  constructor(private friendService: FriendService) {
+    this.friendService.search(this.searchTerm$)
+      .subscribe(results => {
+        this.sendFriends.emit(results);
       });
   }
 
-  // gotoDetail(hero: Hero): void {
-  //   let link = ['/detail', hero.id];
-  //   this.router.navigate(link);
-  // }
+
+
+
 }

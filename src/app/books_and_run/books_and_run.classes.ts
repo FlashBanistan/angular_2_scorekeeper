@@ -1,6 +1,55 @@
 export class Game {
-    players: Player[];
-    rounds: Round[];
+    players: Player[] = [];
+    rounds: Round[] = [
+      {
+          roundNumber: 1,
+          title: "Round 1",
+          description: "2 Books",
+          winner: undefined,
+      },
+      {
+          roundNumber: 2,
+          title: "Round 2",
+          description: "1 Book 1 Run",
+          winner: undefined,
+      },
+      {
+          roundNumber: 3,
+          title: "Round 3",
+          description: "2 Runs",
+          winner: undefined,
+      },
+      {
+          roundNumber: 4,
+          title: "Round 4",
+          description: "3 Books",
+          winner: undefined,
+      },
+      {
+          roundNumber: 5,
+          title: "Round 5",
+          description: "2 Books 1 Run",
+          winner: undefined,
+      },
+      {
+          roundNumber: 6,
+          title: "Round 6",
+          description: "2 Runs 1 Book",
+          winner: undefined,
+       },
+      {
+          roundNumber: 7,
+          title: "Round 7",
+          description: "3 Runs",
+          winner: undefined,
+      },
+      {
+          roundNumber: 0,
+          title: "Total",
+          description: "undefined",
+          winner: undefined,
+      },
+    ];
 }
 
 export class Round {

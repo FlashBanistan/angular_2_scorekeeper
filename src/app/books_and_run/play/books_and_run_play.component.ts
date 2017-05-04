@@ -4,6 +4,9 @@ import { BooksAndRunService } from '../books_and_run.service';
 import { Score } from '../books_and_run.classes';
 import { Observable } from 'rxjs/Rx';
 
+import { Friend } from '../../friend';
+// import { FriendSearchComponent } from '../../shared/search/search.component';
+
 // 3rd PARTY IMPORTS
 import {ViewContainerRef} from '@angular/core';
 import {ToastsManager, Toast} from 'ng2-toastr';
@@ -14,23 +17,39 @@ import {ToastsManager, Toast} from 'ng2-toastr';
   moduleId: module.id,
   selector: 'books-and-run-play',
   templateUrl: './books_and_run_play.component.html',
+  // directives: [FriendSearchComponent],
   styleUrls: ['./books_and_run_play.component.css'],
 })
 
 
 export class BooksAndRunPlayComponent implements OnInit, AfterViewChecked {
-  constructor(public booksAndRunService: BooksAndRunService, private toastr: ToastsManager, vRef: ViewContainerRef) {
+  public game;
+  public friends: Friend[] = [];
+
+  constructor(
+    public booksAndRunService: BooksAndRunService,
+    private toastr: ToastsManager, vRef: ViewContainerRef,
+  ) {
     this.toastr.setRootViewContainerRef(vRef);
+
   }
 
-  game = { players: [] };
+  onReceiveFriends(friends):void {
+    this.friends = friends;
+  }
+
+  addFriendToGame(friend) {
+    let player = friend;
+    player['scores'] = new Score('');
+    this.game.players.push(player);
+  }
 
 
   ngOnInit(): void {
     // Either restore game or create a new one:
     if (localStorage.getItem('game') === null) {
       this.game = this.booksAndRunService.prepareGame();
-      this.booksAndRunService.saveGame(this.game);
+      // this.booksAndRunService.saveGame(this.game);
     } else {
       this.game = this.booksAndRunService.restoreGame();
     };
@@ -39,7 +58,7 @@ export class BooksAndRunPlayComponent implements OnInit, AfterViewChecked {
 
   ngAfterViewChecked() {
     // Saves the game after every keystroke:
-    this.booksAndRunService.saveGame(this.game);
+    // this.booksAndRunService.saveGame(this.game);
   }
 
 
@@ -52,6 +71,7 @@ export class BooksAndRunPlayComponent implements OnInit, AfterViewChecked {
 
   createNewGame() {
     // this.booksAndRunService.deleteGame()
+    console.log(this.friends)
   }
 
 

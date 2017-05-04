@@ -1,35 +1,59 @@
 <div class="container">
-  <div class="row">
+
+  <!-- <div class="row">
     <div class="col-md-12 text-center">
       <h4>Score</h4>
     </div>
-  </div>
-  <table id="data-table" class="table table-bordered table-striped">
-    <thead>
-      <tr>
-        <th>Player</th>
-        <th class="text-center" *ngFor="let round of game.rounds">{{ round.title }}</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let player of game.players">
-        <td>{{ player.username }}</td>
-        <td class="text-center" contenteditable="true" [textContent]="player.scores.roundOne"   (input)="player.scores.roundOne = $event.target.textContent"></td>
-        <td class="text-center" contenteditable="true" [textContent]="player.scores.roundTwo"   (input)="player.scores.roundTwo = $event.target.textContent"></td>
-        <td class="text-center" contenteditable="true" [textContent]="player.scores.roundThree"   (input)="player.scores.roundThree = $event.target.textContent"></td>
-        <td class="text-center" contenteditable="true" [textContent]="player.scores.roundFour"   (input)="player.scores.roundFour = $event.target.textContent"></td>
-        <td class="text-center" contenteditable="true" [textContent]="player.scores.roundFive"   (input)="player.scores.roundFive = $event.target.textContent"></td>
-        <td class="text-center" contenteditable="true" [textContent]="player.scores.roundSix"   (input)="player.scores.roundSix = $event.target.textContent"></td>
-        <td class="text-center" contenteditable="true" [textContent]="player.scores.roundSeven"   (input)="player.scores.roundSeven = $event.target.textContent"></td>
-        <td class="text-center"><h5>{{ player.scores.getTotal() }}</h5></td>
-      </tr>
-    </tbody>
-  </table>
-
-  <div class="btn-group">
-    <button class="btn btn-success" type="button" (click)="finishGame(game)">Finish Game</button>
-    <button class="btn btn-primary" type="button" (click)="resetGame()">Reset Game</button>
-    <button class="btn btn-info" type="button" (click)="createNewGame()">New Game</button>
+  </div> -->
+  <div class="row">
+    <div class="col-md-12">
+      <friend-search (sendFriends)='onReceiveFriends($event)'></friend-search>
+      <span *ngIf="friends[0]">
+        <button (click)="addFriendToGame(friend)" class="btn btn-sm btn-secondary" *ngFor="let friend of friends">
+          {{ friend.username }}
+        </button>
+      </span>
+    </div>
   </div>
 
-  <friend-search><friend-search>
+  <div class="row">
+    <div class="col-md-12">
+      <table id="data-table" class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th>Player</th>
+            <th class="text-center" *ngFor="let round of game.rounds">{{ round.title }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let player of game.players">
+            <td>{{ player.username }}</td>
+            <td class="text-center" contenteditable="true" [textContent]="player.scores.roundOne"   (input)="player.scores.roundOne = $event.target.textContent"></td>
+            <td class="text-center" contenteditable="true" [textContent]="player.scores.roundTwo"   (input)="player.scores.roundTwo = $event.target.textContent"></td>
+            <td class="text-center" contenteditable="true" [textContent]="player.scores.roundThree"   (input)="player.scores.roundThree = $event.target.textContent"></td>
+            <td class="text-center" contenteditable="true" [textContent]="player.scores.roundFour"   (input)="player.scores.roundFour = $event.target.textContent"></td>
+            <td class="text-center" contenteditable="true" [textContent]="player.scores.roundFive"   (input)="player.scores.roundFive = $event.target.textContent"></td>
+            <td class="text-center" contenteditable="true" [textContent]="player.scores.roundSix"   (input)="player.scores.roundSix = $event.target.textContent"></td>
+            <td class="text-center" contenteditable="true" [textContent]="player.scores.roundSeven"   (input)="player.scores.roundSeven = $event.target.textContent"></td>
+            <td class="text-center"><h5>{{ player.scores.getTotal() }}</h5></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="!game.players[0]">
+    <div class="col-md-12 text-center">
+      <p class="text">Add Players To Start The Game</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="btn-group">
+        <button class="btn btn-success" type="button" (click)="finishGame(game)">Finish Game</button>
+        <button class="btn btn-success" type="button" (click)="resetGame()">Reset Game</button>
+        <button class="btn btn-success" type="button" (click)="createNewGame()">New Game</button>
+      </div>
+    </div>
+  </div>
