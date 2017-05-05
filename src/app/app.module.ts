@@ -7,7 +7,6 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 // MODULES
 import { AppRouter } from './app.router';
-import { AuthenticationModule } from './authentication/authentication.module';
 import { SharedModule } from './shared/shared.module';
 
 // 3rd PARTY MODULES
@@ -16,6 +15,8 @@ import { ToastModule, ToastOptions } from 'ng2-toastr/ng2-toastr';
 // COMPONENTS
 import { AppComponent } from './app.component';
 
+// SERVICES
+import { AuthenticationService } from './authentication/authentication.service';
 
 @NgModule({
   declarations: [
@@ -25,13 +26,12 @@ import { AppComponent } from './app.component';
     BrowserModule,
     FormsModule,
     HttpModule,
-    AuthenticationModule,
     SharedModule,
     AppRouter,
     BrowserAnimationsModule,
     ToastModule.forRoot(),
   ],
-  providers: [  ],
+  providers: [ AuthenticationService ],
   bootstrap: [AppComponent]
 })
 
