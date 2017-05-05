@@ -13,7 +13,7 @@ import { Statistics } from './statistics';
 
 export class LeaderboardComponent implements OnInit {
   constructor(private leaderboardService: LeaderboardService) {}
-
+  term: string;
   isRequesting: boolean;
   statistics: Statistics[] = [];
   categories: any[] = [
