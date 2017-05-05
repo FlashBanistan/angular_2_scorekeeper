@@ -4,7 +4,7 @@ import { BooksAndRunService } from '../books_and_run.service';
 import { Score } from '../books_and_run.classes';
 import { Observable } from 'rxjs/Rx';
 
-import { Friend } from '../../friend';
+import { Friend } from '../../shared/classes/friend';
 // import { FriendSearchComponent } from '../../shared/search/search.component';
 
 // 3rd PARTY IMPORTS

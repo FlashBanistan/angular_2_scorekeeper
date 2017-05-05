@@ -4,11 +4,7 @@ import { Headers, Http } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/map'; //REMOVE THIS
 
-import { Friend } from './friend';
-
-
-
-
+import { Friend } from '../classes/friend';
 
 import { Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';

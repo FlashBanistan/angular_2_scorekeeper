@@ -3,11 +3,11 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
 // COMPONENTS
-import { SpinnerComponent } from './spinner/spinner.component';
-import { FriendSearchComponent } from './search/search.component';
+import { SpinnerComponent } from './components/spinner.component';
+import { FriendSearchComponent } from './components/search.component';
 
 // PIPES
-import { SearchPipe } from './search.pipe';
+import { SearchPipe } from './pipes/search.pipe';
 
 
 @NgModule({

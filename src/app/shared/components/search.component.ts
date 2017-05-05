@@ -2,8 +2,8 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 
-import { FriendService } from '../../friend.service';
-import { Friend } from '../../friend';
+import { FriendService } from '../services/friend.service';
+import { Friend } from '../classes/friend';
 
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/catch';

@@ -10,7 +10,7 @@ import { SharedModule } from '../shared/shared.module';
 import { BooksAndRunComponent } from "./books_and_run.component";
 import { BooksAndRunPlayComponent } from './play/books_and_run_play.component';
 import { BooksAndRunService } from './books_and_run.service';
-import { FriendService } from '../friend.service';
+// import { FriendService } from '../friend.service';
 
 
 @NgModule({
@@ -25,7 +25,8 @@ import { FriendService } from '../friend.service';
   ],
   exports: [
   ],
-  providers: [ FriendService, BooksAndRunService ],
+  // providers: [ FriendService, BooksAndRunService ],
+  providers: [ BooksAndRunService ],
 })
 
 
