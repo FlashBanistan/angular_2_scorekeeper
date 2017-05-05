@@ -16,7 +16,7 @@ import { ToastModule, ToastOptions } from 'ng2-toastr/ng2-toastr';
 import { AppComponent } from './app.component';
 
 // SERVICES
-import { AuthenticationService } from './authentication/authentication.service';
+import { AuthenticationService } from './shared/services/authentication.service';
 
 @NgModule({
   declarations: [
