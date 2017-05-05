@@ -1,16 +1,13 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
-
 import { FriendService } from '../services/friend.service';
 import { Friend } from '../classes/friend';
-
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/switchMap';
-
 
 
 @Component({
@@ -30,7 +27,6 @@ import 'rxjs/add/operator/switchMap';
   `,
   providers: [FriendService]
 })
-
 
 
 export class FriendSearchComponent {

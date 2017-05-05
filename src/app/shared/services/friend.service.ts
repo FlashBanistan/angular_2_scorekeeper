@@ -1,11 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Headers, Http } from '@angular/http';
-
 import 'rxjs/add/operator/toPromise';
-import 'rxjs/add/operator/map'; //REMOVE THIS
-
+import 'rxjs/add/operator/map';
 import { Friend } from '../classes/friend';
-
 import { Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
@@ -30,9 +27,6 @@ export class FriendService {
       .get('http://localhost:8000/api/friendlist/' + this.user.user_id + '/get_friend/?username=' + term )
       .map(res => res.json());
   }
-
-
-
 
 
 }

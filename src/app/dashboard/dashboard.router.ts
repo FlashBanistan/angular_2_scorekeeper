@@ -1,8 +1,5 @@
-// ANGULAR IMPORTS
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-
-// COMPONENTS
 import { DashboardComponent } from './dashboard.component';
 
 

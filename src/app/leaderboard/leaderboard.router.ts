@@ -1,14 +1,10 @@
-// ANGULAR IMPORTS
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-
-// COMPONENTS
 import { LeaderboardComponent } from './leaderboard.component';
 
 
-// DEFINE ROUTES
 const routes: Routes = [
-  {path: '', component: LeaderboardComponent}, // locahost:4200/leaderboard
+  {path: '', component: LeaderboardComponent},
 ]
 
 
@@ -17,8 +13,9 @@ const routes: Routes = [
     RouterModule.forChild(routes),
   ],
   exports: [
-    RouterModule, 
+    RouterModule,
   ]
 })
+
 
 export class LeaderboardRouter {};

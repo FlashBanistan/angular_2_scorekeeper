@@ -3,7 +3,6 @@ import { AuthenticationService } from './shared/services/authentication.service'
 import { JwtHelper } from 'angular2-jwt';
 
 
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',

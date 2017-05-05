@@ -1,10 +1,5 @@
-// ANGULAR IMPORTS
 import { Component, OnInit } from '@angular/core';
-
-//SERVICES
 import { LeaderboardService } from './leaderboard.service';
-
-// CLASSES
 import { Statistics } from './statistics';
 
 

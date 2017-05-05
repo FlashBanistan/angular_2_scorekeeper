@@ -1,23 +1,16 @@
-// ANGULAR IMPORTS
 import { Component, OnInit, AfterViewChecked } from '@angular/core';
 import { BooksAndRunService } from '../books_and_run.service';
 import { Score } from '../books_and_run.classes';
 import { Observable } from 'rxjs/Rx';
-
 import { Friend } from '../../shared/classes/friend';
-// import { FriendSearchComponent } from '../../shared/search/search.component';
-
-// 3rd PARTY IMPORTS
 import {ViewContainerRef} from '@angular/core';
 import {ToastsManager, Toast} from 'ng2-toastr';
-
 
 
 @Component({
   moduleId: module.id,
   selector: 'books-and-run-play',
   templateUrl: './books_and_run_play.component.html',
-  // directives: [FriendSearchComponent],
   styleUrls: ['./books_and_run_play.component.css'],
 })
 
@@ -50,7 +43,6 @@ export class BooksAndRunPlayComponent implements OnInit, AfterViewChecked {
     this.friends = [];
   }
 
-
   ngOnInit(): void {
     // Either restore game or create a new one:
     if (localStorage.getItem('game') === null) {
@@ -61,12 +53,10 @@ export class BooksAndRunPlayComponent implements OnInit, AfterViewChecked {
     };
   }
 
-
   ngAfterViewChecked() {
     // Saves the game after every keystroke:
     // this.booksAndRunService.saveGame(this.game);
   }
-
 
   resetGame() {
     this.game.players.forEach(function(player) {
@@ -74,12 +64,10 @@ export class BooksAndRunPlayComponent implements OnInit, AfterViewChecked {
     })
   }
 
-
   createNewGame() {
     // this.booksAndRunService.deleteGame()
     console.log(this.friends)
   }
-
 
   finishGame(game) {
     if (!this.booksAndRunService.isGameFinished(game.players)) return this.toastr.warning('Please finish the game.');
