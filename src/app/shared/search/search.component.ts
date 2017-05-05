@@ -28,9 +28,6 @@ import 'rxjs/add/operator/switchMap';
         </div>
       </div>
   `,
-  // styles: [
-  //   '.row { padding-top: 15px; padding-bottom: 15px }'
-  // ],
   providers: [FriendService]
 })
 
@@ -47,13 +44,6 @@ export class FriendSearchComponent {
         this.sendFriends.emit(results);
       });
   }
-
-  clearSearch(event) {
-    console.log(event)
-
-  }
-
-
 
 
 }
