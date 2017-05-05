@@ -19,7 +19,12 @@ import 'rxjs/add/operator/switchMap';
   template: `
       <div class="row">
         <div class="col-md-12">
-          <input placeholder="Search friends..." (keyup)="searchTerm$.next($event.target.value)">
+          <input
+            id="search-box"
+            placeholder="Search friends..."
+            (keyup)="searchTerm$.next($event.target.value)"
+            (focusout)="$event.target.value = ''"
+          >
         </div>
       </div>
   `,
@@ -36,12 +41,16 @@ export class FriendSearchComponent {
 
   searchTerm$ = new Subject<string>();
 
-
   constructor(private friendService: FriendService) {
     this.friendService.search(this.searchTerm$)
       .subscribe(results => {
         this.sendFriends.emit(results);
       });
+  }
+
+  clearSearch(event) {
+    console.log(event)
+
   }
 
 
