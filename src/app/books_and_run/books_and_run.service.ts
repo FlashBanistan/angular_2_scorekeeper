@@ -5,12 +5,20 @@ import { Game, Player, Score, Round } from './books_and_run.classes'
 
 @Injectable()
 export class BooksAndRunService {constructor(private http: Http){}
-
+    /*
+    Prepares a new game instance.
+    Accepts void.
+    Returns game object.
+    */
     prepareGame(){
       return new Game;
     }
 
-
+    /*
+    Restores game from local storages; restores scores prototype to players.
+    Accepts void.
+    Returns game object.
+    */
     restoreGame() {
       var game;
       game = JSON.parse(localStorage.getItem('game'))
@@ -21,18 +29,29 @@ export class BooksAndRunService {constructor(private http: Http){}
       return game;
     }
 
-
+    /*
+    Saves game to local storage.
+    Accepts game object.
+    Returns void.
+    */
     saveGame(game) {
       localStorage.setItem('game', JSON.stringify(game));
     }
 
-
+    /*
+    Removes game from local storage.
+    Accepts void.
+    Returns void.
+    */
     deleteGame() {
-      return localStorage.removeItem('game');
-      // return "Game deleted succesfully!"
+      localStorage.removeItem('game');
     }
 
-    /* Loops through an array of players to check if scores are complete */
+    /*
+    Loops through an array of players to check if scores are complete.
+    Accepts an array of player objects.
+    Returns true or false;
+     */
     isGameFinished(players) {
       for(var i in players) {
         if(!players[i].scores.isComplete()) {
@@ -41,7 +60,6 @@ export class BooksAndRunService {constructor(private http: Http){}
       }
       return true;
     }
-
 
     /*
     Determines total score and number of rounds won for each player.
@@ -69,7 +87,6 @@ export class BooksAndRunService {constructor(private http: Http){}
       return newPlayers
     }
 
-
     /*
     Determines winner of the game.
     Accepts an array of scored player objects.
@@ -86,7 +103,6 @@ export class BooksAndRunService {constructor(private http: Http){}
       }
       return winner
     }
-
 
     /*
     Assign winner or loser.
