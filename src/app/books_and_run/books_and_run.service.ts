@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Headers, Http } from '@angular/http';
-import { Game, Player, Score, Round } from './books_and_run.classes'
+import { Game, Score } from './books_and_run.classes'
 
 
 @Injectable()
