@@ -1,13 +1,12 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import { FriendService } from '../services/friend.service';
 import { Friend } from '../classes/friend';
-import 'rxjs/add/observable/of';
-import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/operator/takeWhile';
 
 
 @Component({
@@ -29,16 +28,23 @@ import 'rxjs/add/operator/switchMap';
 })
 
 
-export class FriendSearchComponent {
-  @Output() sendFriends = new EventEmitter();
-
-  searchTerm$ = new Subject<string>();
+export class FriendSearchComponent implements OnDestroy {
 
   constructor(private friendService: FriendService) {
     this.friendService.search(this.searchTerm$)
+      .takeWhile(() => this.alive)
       .subscribe(results => {
         this.sendFriends.emit(results);
       });
+
+  }
+
+  private alive: boolean = true;
+  private searchTerm$ = new Subject<string>();
+  @Output() sendFriends = new EventEmitter();
+
+  ngOnDestroy() {
+    this.alive = false;
   }
 
 
