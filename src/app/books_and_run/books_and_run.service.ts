@@ -6,34 +6,6 @@ import { Game, Player, Score, Round } from './books_and_run.classes'
 @Injectable()
 export class BooksAndRunService {constructor(private http: Http){}
 
-    user = JSON.parse(localStorage.getItem('user'));
-    players: Player[] = [];
-
-
-    getPlayers() {
-        return this.players;
-    }
-
-
-    addPlayer(player) {
-        this.players.push(player);
-    }
-
-
-    removePlayer(player) {
-        for(var i=0; i<this.players.length; i++) {
-            if(this.players[i].url == player.url) {
-                this.players.splice(i, 1);
-            }
-        }
-    }
-
-
-    resetPlayers() {
-        this.players = [];
-    }
-
-
     prepareGame(){
       return new Game;
     }
