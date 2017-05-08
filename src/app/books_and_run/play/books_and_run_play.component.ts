@@ -1,10 +1,11 @@
-import { Component, OnInit, AfterViewChecked } from '@angular/core';
+import { Component, OnInit, AfterViewChecked, OnDestroy } from '@angular/core';
 import { BooksAndRunService } from '../books_and_run.service';
 import { Score } from '../books_and_run.classes';
 import { Observable } from 'rxjs/Rx';
 import { Friend } from '../../shared/classes/friend';
 import {ViewContainerRef} from '@angular/core';
 import {ToastsManager, Toast} from 'ng2-toastr';
+import 'rxjs/add/operator/takeWhile';
 
 
 @Component({
@@ -15,8 +16,9 @@ import {ToastsManager, Toast} from 'ng2-toastr';
 })
 
 
-export class BooksAndRunPlayComponent implements OnInit, AfterViewChecked {
+export class BooksAndRunPlayComponent implements OnInit, AfterViewChecked, OnDestroy {
   public game;
+  private alive: boolean = true;
   public friends: Friend[] = [];
 
   constructor(
@@ -66,6 +68,10 @@ export class BooksAndRunPlayComponent implements OnInit, AfterViewChecked {
     // this.booksAndRunService.saveGame(this.game);
   }
 
+  ngOnDestroy() {
+    this.alive = false;
+  }
+
   resetGame() {
     this.game.players.forEach(function(player) {
       player.scores = new Score("");
@@ -78,6 +84,7 @@ export class BooksAndRunPlayComponent implements OnInit, AfterViewChecked {
   }
 
   finishGame(game) {
+    if(game.players.length <= 0) return this.toastr.warning('Add players to game.')
     if (!this.booksAndRunService.isGameFinished(game.players)) return this.toastr.warning('Please finish the game.');
 
     var scoredPlayers = this.booksAndRunService.generatePlayersStats(game.players);
@@ -87,15 +94,16 @@ export class BooksAndRunPlayComponent implements OnInit, AfterViewChecked {
 
     for (var i = 0; i < scoredPlayers.length; i++) {
       this.booksAndRunService.recordStats(scoredPlayers[i])
+        .takeWhile(() => this.alive)
         .map(
         (res => res.json()),
-      )
-        .subscribe(
-        (result => this.toastr
-          .success(result.user.username + ', has been saved.', 'Success!', { toastLife: 5000, showCloseButton: false })),
-        (error => this.toastr
-          .error(error.statusText + '.  Write your stats down before resetting the game.', 'Failure!', { toastLife: 5000, showCloseButton: false }))
         )
+        .subscribe(
+          (result => this.toastr
+            .success(result.user.username + ', has been saved.', 'Success!')),
+          (error => this.toastr
+            .error(error.statusText + '.  Write your stats down before resetting the game.', 'Failure!'))
+          )
     }
   }
 
