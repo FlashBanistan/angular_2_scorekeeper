@@ -34,13 +34,21 @@ export class BooksAndRunPlayComponent implements OnInit, AfterViewChecked {
   addFriendToGame(friend) {
     friend['scores'] = new Score('');
     if(this.game.players.find(function(player) {
-      return friend.pk === player.pk
+      return friend.pk === player.pk;
     })) {
       return this.toastr
         .error("Player already in game!", "Failure!", { toastLife: 4000, showCloseButton: false })
     }
     this.game.players.push(friend);
     this.friends = [];
+  }
+
+  removeFriendFromGame(friend) {
+    for(var i=0; i<this.game.players.length; i++) {
+      if(friend.pk === this.game.players[i].pk) {
+        return this.game.players.splice(i, 1);
+      }
+    }
   }
 
   ngOnInit(): void {

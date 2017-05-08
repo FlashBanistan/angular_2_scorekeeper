@@ -20,7 +20,11 @@
         </thead>
         <tbody>
           <tr *ngFor="let player of game.players">
-            <td>{{ player.username }}</td>
+            <td>{{ player.username }}
+              <button type="button" class="close" (click)="removeFriendFromGame(player)" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </td>
             <td class="text-center" contenteditable="true" [textContent]="player.scores.roundOne"   (input)="player.scores.roundOne = $event.target.textContent"></td>
             <td class="text-center" contenteditable="true" [textContent]="player.scores.roundTwo"   (input)="player.scores.roundTwo = $event.target.textContent"></td>
             <td class="text-center" contenteditable="true" [textContent]="player.scores.roundThree"   (input)="player.scores.roundThree = $event.target.textContent"></td>
