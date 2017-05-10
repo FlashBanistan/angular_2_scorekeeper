@@ -39,8 +39,8 @@ export class FriendSearchComponent implements OnDestroy {
 
   }
 
-  private alive: boolean = true;
-  private searchTerm$ = new Subject<string>();
+  public alive: boolean = true;
+  public searchTerm$ = new Subject<string>();
   @Output() sendFriends = new EventEmitter();
 
   ngOnDestroy() {
