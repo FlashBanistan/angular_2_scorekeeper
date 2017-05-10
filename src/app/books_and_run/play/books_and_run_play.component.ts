@@ -78,11 +78,6 @@ export class BooksAndRunPlayComponent implements OnInit, AfterViewChecked, OnDes
     })
   }
 
-  createNewGame() {
-    // this.booksAndRunService.deleteGame()
-    console.log(this.friends)
-  }
-
   finishGame(game) {
     if(game.players.length <= 0) return this.toastr.warning('Add players to game.')
     if (!this.booksAndRunService.isGameFinished(game.players)) return this.toastr.warning('Please finish the game.');
