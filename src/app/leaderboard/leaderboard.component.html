@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="row">
+  <!--<div class="row">
     <div class="col-md-12 text-center">
       <h4>Leaderboard</h4>
     </div>
@@ -22,6 +22,9 @@
         <td>{{ statistic.high_score }}</td>
       </tr>
     </tbody>
-  </table>
+  </table>-->
+  <ngx-datatable>
+    <!--<ngx-datatable-column>Name</ngx-datatable-column>-->
+  </ngx-datatable>
   <my-spinner [isRunning]="isRequesting"></my-spinner>
 </div>
