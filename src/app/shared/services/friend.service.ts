@@ -22,7 +22,7 @@ export class FriendService {
 
   searchEntries(term) {
     return this.http
-      .get('http://localhost:8000/api/friendlist/' + this.user.user_id + '/get_friend/?username=' + term )
+      .get('https://django-scorekeeper-api.herokuapp.com/api/friendlist/' + this.user.user_id + '/get_friend/?username=' + term )
       .map(res => res.json());
   }
 

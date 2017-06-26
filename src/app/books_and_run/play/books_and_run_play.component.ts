@@ -65,7 +65,7 @@ export class BooksAndRunPlayComponent implements OnInit, AfterViewChecked, OnDes
 
   ngAfterViewChecked() {
     // Saves the game after every keystroke:
-    // this.booksAndRunService.saveGame(this.game);
+    this.booksAndRunService.saveGame(this.game);
   }
 
   ngOnDestroy() {

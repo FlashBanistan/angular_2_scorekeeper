@@ -1,5 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+
 import { SpinnerComponent } from './components/spinner.component';
 import { FriendSearchComponent } from './components/search.component';
 import { SearchPipe } from './pipes/search.pipe';
@@ -13,6 +15,7 @@ import { SearchPipe } from './pipes/search.pipe';
   ],
   imports: [
     CommonModule,
+    NgxDatatableModule,
   ],
   exports: [
     SpinnerComponent,

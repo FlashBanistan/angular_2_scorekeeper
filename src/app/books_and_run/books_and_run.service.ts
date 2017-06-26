@@ -129,7 +129,7 @@ export class BooksAndRunService {constructor(private http: Http){}
     recordStats(scoredPlayer) {
       let headers = new Headers({ 'Content-Type': 'application/json' });
 
-      return this.http.put('http://localhost:8000/api/books_and_run/statistics/' + scoredPlayer.pk + '/', JSON.stringify(scoredPlayer), {headers: headers});
+      return this.http.put('https://django-scorekeeper-api.herokuapp.com/api/books_and_run/statistics/' + scoredPlayer.pk + '/', JSON.stringify(scoredPlayer), {headers: headers});
     }
 
 

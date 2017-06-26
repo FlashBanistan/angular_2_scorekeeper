@@ -21,7 +21,7 @@ export class AuthenticationService {
         var headers = new Headers();
         headers.append('Content-Type', 'application/json');
         // 'https://django-scorekeeper-api.herokuapp.com/api/auth/get_token/'
-        return this.http.post('http://localhost:8000/api/auth/get_token/', JSON.stringify(creds), {headers: headers})
+        return this.http.post('https://django-scorekeeper-api.herokuapp.com/api/auth/get_token/', JSON.stringify(creds), {headers: headers})
 
     }
 
@@ -38,7 +38,7 @@ export class AuthenticationService {
       var headers = new Headers();
       headers.append('Content-Type', 'application/json');
       // 'https://django-scorekeeper-api.herokuapp.com/api/auth/verifyToken/'
-      this.http.post('http://localhost:8000/api/auth/verifyToken/', token, {headers: headers})
+      this.http.post('https://django-scorekeeper-api.herokuapp.com/api/auth/verifyToken/', token, {headers: headers})
         .subscribe(
           response => {
 
